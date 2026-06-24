@@ -15,10 +15,21 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
- 
         stage('SonarQube Scan') {
             steps {
-                echo 'SonarQube Scan Completed'
+                withSonarQubeEnv('sonar') {
+                    sh '''
+                    mvn sonar:sonar \
+                    -Dsonar.projectKey=poc4-app \
+                    -Dsonar.projectName=poc4-app
+                    '''
+                }
+            }
+        }
+         
+        stage('Upload to Nexus') {
+            steps {
+                sh 'mvn deploy'
             }
         }
  
@@ -57,6 +68,20 @@ pipeline {
                 sh 'kubectl apply -f service.yaml'
             }
         }
+        post {
+            success {
+                mail to: 'sukanthrshettysuku@gmail.com',
+                subject: "SUCCESS: ${env.JOB_NAME}",
+                body: "Build Successful: ${env.BUILD_URL}"
+            }
+         
+            failure {
+                mail to: 'sukanthrshettysuku@gmail.com',
+                subject: "FAILED: ${env.JOB_NAME}",
+                body: "Build Failed: ${env.BUILD_URL}"
+            }
+        }
+         
     }
 }
  
