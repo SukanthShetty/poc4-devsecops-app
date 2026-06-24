@@ -67,6 +67,7 @@ pipeline {
                 sh 'kubectl apply -f service.yaml'
             }
         }
+        }    
         post {
             success {
                 mail to: 'sukanthrshettysuku@gmail.com',
