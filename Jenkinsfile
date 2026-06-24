@@ -15,6 +15,7 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+ 
         stage('SonarQube Scan') {
             steps {
                 withSonarQubeEnv('sonar') {
@@ -26,7 +27,7 @@ pipeline {
                 }
             }
         }
-         
+ 
         stage('Upload to Nexus') {
             steps {
                 sh 'mvn deploy'
@@ -45,7 +46,6 @@ pipeline {
             }
         }
  
-
         stage('Docker Push') {
             steps {
                 withCredentials([usernamePassword(
@@ -61,27 +61,26 @@ pipeline {
             }
         }
  
- 
         stage('Deploy to K3s') {
             steps {
                 sh 'kubectl apply -f deployment.yaml'
                 sh 'kubectl apply -f service.yaml'
             }
         }
-        post {
-            success {
-                mail to: 'sukanthrshettysuku@gmail.com',
-                subject: "SUCCESS: ${env.JOB_NAME}",
-                body: "Build Successful: ${env.BUILD_URL}"
-            }
-         
-            failure {
-                mail to: 'sukanthrshettysuku@gmail.com',
-                subject: "FAILED: ${env.JOB_NAME}",
-                body: "Build Failed: ${env.BUILD_URL}"
-            }
+ 
+    }
+ 
+    post {
+        success {
+            mail to: 'sukanthrshettysuku@gmail.com',
+            subject: "SUCCESS: ${env.JOB_NAME}",
+            body: "Build Successful: ${env.BUILD_URL}"
         }
-         
+ 
+        failure {
+            mail to: 'sukanthrshettysuku@gmail.com',
+            subject: "FAILED: ${env.JOB_NAME}",
+            body: "Build Failed: ${env.BUILD_URL}"
+        }
     }
 }
- 
