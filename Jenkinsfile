@@ -83,6 +83,4 @@ pipeline {
         }
     }
 }
-GitHub - SukanthShetty/poc4-devsecops-app
-Contribute to SukanthShetty/poc4-devsecops-app development by creating an account on GitHub.
  
