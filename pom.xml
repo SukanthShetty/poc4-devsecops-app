@@ -7,7 +7,7 @@
  
     <groupId>com.poc4</groupId>
     <artifactId>poc4-app</artifactId>
-    <version>1.0</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
  
     <dependencies>
