@@ -70,17 +70,4 @@ pipeline {
  
     }
  
-    post {
-        success {
-            mail to: 'sukanthrshettysuku@gmail.com',
-            subject: "SUCCESS: ${env.JOB_NAME}",
-            body: "Build Successful: ${env.BUILD_URL}"
-        }
- 
-        failure {
-            mail to: 'sukanthrshettysuku@gmail.com',
-            subject: "FAILED: ${env.JOB_NAME}",
-            body: "Build Failed: ${env.BUILD_URL}"
-        }
-    }
-}
+ }
