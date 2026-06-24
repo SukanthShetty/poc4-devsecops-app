@@ -7,7 +7,7 @@
  
     <groupId>com.poc4</groupId>
     <artifactId>poc4-app</artifactId>
-    <version>1.2</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
  
     <dependencies>
@@ -20,11 +20,11 @@
     </dependencies>
  
     <distributionManagement>
-        <repository>
+        <snapshotRepository>
             <id>nexus</id>
-            <name>Nexus Releases</name>
-            <url>http://54.206.94.57:8081/repository/maven-releases/</url>
-        </repository>
+            <name>Nexus Snapshots</name>
+            <url>http://54.206.94.57:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
     </distributionManagement>
  
     <build>
