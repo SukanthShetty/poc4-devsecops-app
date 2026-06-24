@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poc4-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: poc4-app
+  template:
+    metadata:
+      labels:
+        app: poc4-app
+    spec:
+      containers:
+      - name: poc4-app
+        image: skanthshetty/poc4-app:latest
+        ports:
+        - containerPort: 80
+ 
